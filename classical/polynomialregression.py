@@ -49,14 +49,13 @@ def polynomial_regression(degree):
     plt.grid(True)
     plt.show()
 
-if __name__ == "__main__":
-    for degree in range(1, 11):
-        polynomial_regression(degree)
+for degree in range(1, 11):
+    polynomial_regression(degree)
 
-    plt.figure(figsize=(8,6))
-    plt.plot(range(1, 11), mse_poly, marker='o', linestyle='-', color='b')
-    plt.title('MSE vs. Polynomial Degree')
-    plt.xlabel('Polynomial Degree')
-    plt.ylabel('Mean Squared Error (MSE)')
-    plt.grid(True)
-    plt.show()
+plt.figure(figsize=(8,6))
+plt.plot(range(1, 11), mse_poly, marker='o', linestyle='-', color='b')
+plt.title('MSE vs. Polynomial Degree')
+plt.xlabel('Polynomial Degree')
+plt.ylabel('Mean Squared Error (MSE)')
+plt.grid(True)
+plt.show()

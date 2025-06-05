@@ -43,9 +43,9 @@ dev_x, dev_y = inverse_transform(scaler_x, scaler_y, X_dev, y_dev)
 test_x, test_y = inverse_transform(scaler_x, scaler_y, X_test, y_test)
 
 #Create DataFrames for each dataset
-df_train = pd.DataFrame({'x': train_x, 'y': train_y})
-df_dev = pd.DataFrame({'x': dev_x, 'y': dev_y})
-df_test = pd.DataFrame({'x': test_x, 'y': test_y})
+df_train = pd.DataFrame({'x': X_train.flatten(), 'y': y_train.flatten()})
+df_dev = pd.DataFrame({'x': X_dev.flatten(), 'y': y_dev.flatten()})
+df_test = pd.DataFrame({'x': X_test.flatten(), 'y': y_test.flatten()})
 
 #Write each DataFrame to a separate CSV file
 df_train.to_csv('scicompproject/dataset/train_data.csv', index=False)

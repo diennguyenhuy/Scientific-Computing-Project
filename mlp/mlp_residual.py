@@ -119,24 +119,24 @@ def mlp_predict(model, X):
         y_pred = model(X_t).cpu().numpy()
     return y_pred
 
-if __name__ == "__main__":
-    mlp_residual = mlp_train(
-        ResidualMLPBN(),
-        lr=0.001,
-        epochs=700,
-        patience=100
-    )
+print("Training Residual MLP...")
+mlp_residual = mlp_train(
+    ResidualMLPBN(),
+    lr=0.001,
+    epochs=700,
+    patience=100
+)
 
-    y_pred_residual = mlp_predict(mlp_residual, X_test)
-    mse_residual = mean_squared_error(test_y, scaler_y.inverse_transform(y_pred_residual))
-    print(f"Residual MLP Optimized Test MSE: {mse_residual:.6f}")
+y_pred_residual = mlp_predict(mlp_residual, X_test)
+mse_residual = mean_squared_error(test_y, scaler_y.inverse_transform(y_pred_residual))
+print(f"Residual MLP Test MSE: {mse_residual:.6f}")
 
-    plt.figure(figsize=(10,6))
-    plt.scatter(test_x, test_y, label='True Test', s=15)
-    plt.scatter(test_x, scaler_y.inverse_transform(y_pred_residual), label='Residual MLP Optimized', s=15)
-    plt.title("Residual MLP Optimized Predictions on Test Set")
-    plt.xlabel("x")
-    plt.ylabel("y")
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+plt.figure(figsize=(10,6))
+plt.scatter(test_x, test_y, label='True Test', s=15)
+plt.scatter(test_x, scaler_y.inverse_transform(y_pred_residual), label='Residual MLP', s=15)
+plt.title("Residual MLP Predictions on Test Set")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend()
+plt.grid(True)
+plt.show()

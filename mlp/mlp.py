@@ -198,7 +198,7 @@ plt.grid(True)
 plt.show()
 
 #MLP LR Scheduler
-print("Training MLP with LR Scheduler")
+print("Training MLP with LR Scheduler...")
 mlp_lr_scheduler = mlp_train(
     MLP(hidden_layers=[100, 50, 30], dropout=0.2, batch_norm=True, activation='gelu'),
     lr=0.01,

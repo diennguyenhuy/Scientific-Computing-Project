@@ -50,9 +50,8 @@ def lagrange_interpolation(num_points_lagrange):
     plt.title(f'Lagrange Interpolation Predictions (based on {num_points_lagrange} points of Train set)')
     plt.show()
 
-if __name__ == "__main__":
-    lagrange_interpolation(5)
-    lagrange_interpolation(10)
-    lagrange_interpolation(15)
-    lagrange_interpolation(20)
-    lagrange_interpolation(25)
+lagrange_interpolation(5)
+lagrange_interpolation(10)
+lagrange_interpolation(15)
+lagrange_interpolation(20)
+lagrange_interpolation(25)
