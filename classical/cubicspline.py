@@ -4,10 +4,17 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error
 import joblib
 from scipy.interpolate import CubicSpline
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRAIN_PATH = os.path.join(BASE_DIR, 'dataset', 'train_data.csv')
+TEST_PATH = os.path.join(BASE_DIR, 'dataset', 'test_data.csv')
+SCALERX_PATH = os.path.join(BASE_DIR, 'dataset', 'scaler_x.pkl')
+SCALERY_PATH = os.path.join(BASE_DIR, 'dataset', 'scaler_y.pkl')
 
 #read csv
-df_train = pd.read_csv('scicompproject/dataset/train_data.csv')
-df_test = pd.read_csv('scicompproject/dataset/test_data.csv')
+df_train = pd.read_csv(TRAIN_PATH)
+df_test = pd.read_csv(TEST_PATH)
 
 #load data from dataframe
 X_train = df_train['x'].values.reshape(-1, 1)
@@ -17,8 +24,8 @@ X_test = df_test['x'].values.reshape(-1, 1)
 y_test = df_test['y'].values.reshape(-1, 1)
 
 #read scaler
-scaler_x = joblib.load('scicompproject/dataset/scaler_x.pkl')
-scaler_y = joblib.load('scicompproject/dataset/scaler_y.pkl')
+scaler_x = joblib.load(SCALERX_PATH)
+scaler_y = joblib.load(SCALERY_PATH)
 
 test_x = scaler_x.inverse_transform(X_test)
 test_y = scaler_y.inverse_transform(y_test)

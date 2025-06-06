@@ -4,6 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import joblib
+import os
 
 #Ground truth function
 def f(x):
@@ -47,14 +48,23 @@ df_train = pd.DataFrame({'x': X_train.flatten(), 'y': y_train.flatten()})
 df_dev = pd.DataFrame({'x': X_dev.flatten(), 'y': y_dev.flatten()})
 df_test = pd.DataFrame({'x': X_test.flatten(), 'y': y_test.flatten()})
 
+#Create path to datasets
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRAIN_PATH = os.path.join(BASE_DIR, 'dataset', 'train_data.csv')
+TEST_PATH = os.path.join(BASE_DIR, 'dataset', 'test_data.csv')
+DEV_PATH = os.path.join(BASE_DIR, 'dataset', 'dev_data.csv')
+SCALERX_PATH = os.path.join(BASE_DIR, 'dataset', 'scaler_x.pkl')
+SCALERY_PATH = os.path.join(BASE_DIR, 'dataset', 'scaler_y.pkl')
+
 #Write each DataFrame to a separate CSV file
-df_train.to_csv('scicompproject/dataset/train_data.csv', index=False)
-df_dev.to_csv('scicompproject/dataset/dev_data.csv', index=False)
-df_test.to_csv('scicompproject/dataset/test_data.csv', index=False)
+df_train.to_csv(TRAIN_PATH, index=False)
+df_dev.to_csv(TEST_PATH, index=False)
+df_test.to_csv(DEV_PATH, index=False)
 
 #Save scalers
-joblib.dump(scaler_x, 'scicompproject/dataset/scaler_x.pkl')
-joblib.dump(scaler_y, 'scicompproject/dataset/scaler_y.pkl')
+joblib.dump(scaler_x, SCALERX_PATH)
+joblib.dump(scaler_y, SCALERY_PATH)
 
 if __name__ == "__main__":
     print(f'Train samples: {X_train.shape[0]}')

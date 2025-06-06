@@ -6,6 +6,7 @@ import joblib
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import os
 
 class MLP(nn.Module):
     def __init__(self, in_features=1, out_features=1, hidden_layers=[50, 30], activation='relu', batch_norm=False, dropout=0.1):
@@ -37,11 +38,18 @@ class MLP(nn.Module):
 
     def forward(self, x):
         return self.net(x)
+    
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRAIN_PATH = os.path.join(BASE_DIR, 'dataset', 'train_data.csv')
+TEST_PATH = os.path.join(BASE_DIR, 'dataset', 'test_data.csv')
+DEV_PATH = os.path.join(BASE_DIR, 'dataset', 'dev_data.csv')
+SCALERX_PATH = os.path.join(BASE_DIR, 'dataset', 'scaler_x.pkl')
+SCALERY_PATH = os.path.join(BASE_DIR, 'dataset', 'scaler_y.pkl')
 
 #read csv
-df_train = pd.read_csv('scicompproject/dataset/train_data.csv')
-df_test = pd.read_csv('scicompproject/dataset/test_data.csv')
-df_dev = pd.read_csv('scicompproject/dataset/dev_data.csv')
+df_train = pd.read_csv(TRAIN_PATH)
+df_test = pd.read_csv(TEST_PATH)
+df_dev = pd.read_csv(DEV_PATH)
 
 #load data from dataframe
 X_train = df_train['x'].values.reshape(-1, 1)
@@ -54,8 +62,8 @@ X_dev = df_dev['x'].values.reshape(-1, 1)
 y_dev = df_dev['y'].values.reshape(-1, 1)
 
 #read scaler
-scaler_x = joblib.load('scicompproject/dataset/scaler_x.pkl')
-scaler_y = joblib.load('scicompproject/dataset/scaler_y.pkl')
+scaler_x = joblib.load(SCALERX_PATH)
+scaler_y = joblib.load(SCALERY_PATH)
 
 test_x = scaler_x.inverse_transform(X_test)
 test_y = scaler_y.inverse_transform(y_test)
